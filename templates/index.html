@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatJP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .note-container {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ChatJP</h1>
+        
+        <!-- Form to ask a new question -->
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="question">Enter your JP-specific query:</label>
+                <textarea class="form-control" id="question" name="question" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Ask ChatJP</button>
+        </form>
+
+        <hr>
+
+        <!-- Display the question with answers -->
+        <h2>Answered Questions</h2>
+        <ul class="list-unstyled">
+            {% for question in questions %}
+            <li class="question-container">
+                <strong>Your question:</strong>
+                <p>{{ question.original_question }}</p>
+                <strong>ChatJP's answer:</strong>
+                <p>{{ question.answer }}</p>
+                {% if question.advice %}
+                <strong>Advice:</strong>
+                <p>{{ question.advice }}</p>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
